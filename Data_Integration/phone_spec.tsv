@@ -1,8 +1,8 @@
-Name	Subject No.	Sex	Age	Height [m]	Weight [kg]
-Michal	235 male	23	1,79	69
-Jordi	236	male            			
-Victor	236	male	25	1,65	71
-Shreyas	238	male	25	1,82	75
+Name	Subject No.	Sex	Age	Height [m]	Weight [kg]	Subject 
+Michal	235 male	23	1,79	69	235  
+Jordi	236	male            		236	
+Victor	236	male	25	1,65	71	237
+Shreyas	238	male	25	1,82	75	238
 					
 Sensor name	Type	Model	Placement		
 gait01	Smartphone	Galaxy S9+	Right back pocket		
