@@ -1,0 +1,15 @@
+Name	Subject No.	Sex	Age	Height [m]	Weight [kg]
+Michal	235	male	23	1,79	69
+Jordi	236	male			
+Victor	236	male	25	1,65	71
+Shreyas	238	male	25	1,82	75
+					
+Sensor name	Type	Model	Placement		
+gait01	Smartphone	Galaxy S9+	Right back pocket		
+gait02					
+gait03	Smartphone	SE 2020	Right front pocket		
+gait04	Smartphone	One Plus 8	Left Front pocket		
+					
+Data collection info					
+Place	Date	Time			
+Aachen	07.11.2021	10:00-11:30			
