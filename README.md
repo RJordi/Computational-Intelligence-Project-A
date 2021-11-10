@@ -9,12 +9,12 @@ Gait Project
 
 In General:
 
--Finish data processing. ie. cutting out the noise of the data and upload to sciebo.
+- [Finish data processing. ie. cutting out the noise of the data and upload to sciebo. ] 
+
+
 
 Chris:
-
--begin report
+- begin report
 
 Viktor:
-
--stop being so beautiful
+- stop being so beautiful
