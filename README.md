@@ -2,20 +2,15 @@
 Gait Project
 
 **Progress:**
-
--Data Collection complete
+1. Data Collection Complete
 
 **Todo:**
 
 In General:
-
-- [Finish data processing. ie. cutting out the noise of the data and upload to sciebo. ] 
-- [ test
-test 2] 
-
+- Finish data processing. ie. cutting out the noise of the data and upload to sciebo.
 
 Chris:
 - begin report
 
 Viktor:
-- stop being so beautiful
+- stop being so **ugly**
