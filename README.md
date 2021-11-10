@@ -10,7 +10,8 @@ Gait Project
 In General:
 
 - [Finish data processing. ie. cutting out the noise of the data and upload to sciebo. ] 
-
+- [ test
+test 2] 
 
 
 Chris:
