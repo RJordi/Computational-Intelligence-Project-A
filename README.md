@@ -2,6 +2,7 @@
 Gait Project
 
 **Progress:**
+
 -Data Collection complete
 
 **Todo:**
