@@ -17,7 +17,7 @@ def extract_sequence (experiment): # the input experiment is an object of the cl
 	def plot():
 		plt.plot(Td.time, Td.a_x)
 		#plt.plot(Td.time, np.ones(len(Td.time))*median_x)
-		plt.vlines(Td.time[time_step_idx], -20, 20, colors='green')
+		#plt.vlines(Td.time[time_step_idx], -20, 20, colors='green')
 		plt.plot()
 		plt.show()
 
@@ -30,7 +30,7 @@ def extract_sequence (experiment): # the input experiment is an object of the cl
 	experiment_flag = False
 	variance = 1
 
-	'''for e in range(1,len(time_step_idx)):
+	for e in range(1,len(time_step_idx)):
 
 		time_step_a_x = Td.a_x[time_step_idx[e-1]:time_step_idx[e]]
 
@@ -51,7 +51,7 @@ def extract_sequence (experiment): # the input experiment is an object of the cl
 	Td.time = Td.time[start:end]
 	Td.a_x = Td.a_x[start:end]
 	Td.a_y = Td.a_y[start:end]
-	Td.a_z = Td.a_z[start:end]'''
+	Td.a_z = Td.a_z[start:end]
 
 	plot()
 
