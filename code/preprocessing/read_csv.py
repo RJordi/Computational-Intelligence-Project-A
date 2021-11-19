@@ -22,4 +22,8 @@ class Data:
 		self.x = df[df.keys()[1]]
 		self.y = df[df.keys()[2]]
 		self.z = df[df.keys()[3]]
-		self.frequency = self.time[len(df)-1]/len(df) #frequency of data in seconds
+		self.frequency = len(df)/self.time[len(df)-1] #frequency of data in Hz (s^-1)
+
+		# NOTE: due to the rotation of the phone, initially we don't know if the data
+		# of a certain coordinate really corresponds to that coordinate.
+		# After rotating (PCA), the data from each coordinate will be correctly correlated. 

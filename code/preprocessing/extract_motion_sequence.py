@@ -3,64 +3,21 @@
 ### function: extract the motion sequence
 ##############################
 
-'''### PLAYGROUND ###
-from read_csv import Data
-import matplotlib.pyplot as plt
 import numpy as np
-
-Td = Data(241, 'downstairs', '02') # Td stands for Trial_data
-Td.extract_csv()
-###	PLAYGROUND ###'''
-
+from scipy import signal
 
 def extract_sequence (experiment): # the input experiment is an object of the class Data from read_csv.py
-	def plot():
-		plt.plot(Td.time, Td.x)
-		#plt.plot(Td.time, np.ones(len(Td.time))*median_x)
-		#plt.vlines(Td.time[time_step_idx], -20, 20, colors='green')
-		plt.plot()
-		plt.show()
 
-	#median_x = Td.a_x.median()
-	time_step = 0.5 
-	rows_per_time_step = int(time_step//experiment.frequency)
-	time_step_idx = [idx for idx in range(0,len(experiment.time)-1,rows_per_time_step)]
+	acc_vector = np.vstack((experiment.x, experiment.y, experiment.z)).T
+	acc_abs = np.linalg.norm(acc_vector, axis=1)
 
-	wait_flag = False
-	experiment_flag = False
-	variance = 1
+	peaks, _ = signal.find_peaks(acc_abs, height=11, distance=experiment.frequency/2)
+	diff_peaks = np.diff(peaks)
+	gap1  = np.argmax(diff_peaks[:20])
+	gap2  = np.argmax(diff_peaks[-10:])
+	gap2  = int(gap2 + np.shape(diff_peaks)-10)
 
-	for e in range(1,len(time_step_idx)):
-
-		time_step_x = experiment.x[time_step_idx[e-1]:time_step_idx[e]]
-
-		if abs(max(time_step_x)-min(time_step_x)) < variance:
-			wait_flag = True
-			if experiment_flag == True:
-				end = time_step_idx[e]
-				print('end: ', end)
-				break
-			experiment_flag = False
-
-		if wait_flag == True and abs(max(time_step_x)-min(time_step_x)) > variance:
-			wait_flag = False
-			experiment_flag = True
-			start = time_step_idx[e]
-			print('start: ', start)
-
-	experiment.time = experiment.time[start:end]
-	experiment.x = experiment.x[start:end]
-	experiment.y = experiment.y[start:end]
-	experiment.z = experiment.z[start:end]
-
-	#plot()
-
-
-
-
-
-
-
-
-if __name__ == '__main__':
-	extract_sequence(Td)
+	experiment.time = experiment.time[peaks[gap1+1]:peaks[gap2]]
+	experiment.x = acc_vector[peaks[gap1+1]:peaks[gap2]][:,0]
+	experiment.y = acc_vector[peaks[gap1+1]:peaks[gap2]][:,1]
+	experiment.z = acc_vector[peaks[gap1+1]:peaks[gap2]][:,2]
