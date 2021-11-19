@@ -24,10 +24,9 @@ for subject_num in range(241, 242):
 				# and when entering the except case we create a boolean attribute called self.available with False value
 
 # Filter data
-			#filter_data.filter_data(Exp_data)
+			filter_data.filter_data(Exp_data)
 
 # Extract frequency
-			#plot_data.plot_data(Exp_data)
 			extract_motion_sequence.extract_sequence(Exp_data)
 
 # Normalize and standarize data

@@ -8,7 +8,9 @@ from scipy import signal
 
 def extract_sequence (experiment): # the input experiment is an object of the class Data from read_csv.py
 
+	#put the three coordinates arrays as columns of a matrix (each row is a time sample)
 	acc_vector = np.vstack((experiment.x, experiment.y, experiment.z)).T
+	
 	acc_abs = np.linalg.norm(acc_vector, axis=1)
 
 	peaks, _ = signal.find_peaks(acc_abs, height=11, distance=experiment.frequency/2)
