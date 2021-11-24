@@ -30,8 +30,7 @@ for subject_num in range(241, 242):
 			extract_motion_sequence.extract_sequence(Exp_data)
 
 # Normalize and standarize data
-			#normalize_and_standarize.normalize(Exp_data)
-			#normalize_and_standarize.standarize(Exp_data)
+			normalize_and_standarize.standarize(Exp_data)
 
 # Plot data
 			plot_data.plot_data(Exp_data)
