@@ -17,9 +17,9 @@ def normalize(experiment):
     df_mod = 0.5 * (np.tanh(0.01 * ((experiment.z - m) / std)) + 1)
     experiment.z  = df_mod
 
-### FIXING ###    
+# Standardising 
 def standarize(experiment):
 
     experiment.x = (experiment.x  - experiment.x.mean()) / experiment.x.std()
-    #experiment.y = (experiment.y  - experiment.y.mean()) / experiment.y.std()
-    #experiment.z = (experiment.z  - experiment.z.mean()) / experiment.z.std()
+    experiment.y = (experiment.y  - experiment.y.mean()) / experiment.y.std()
+    experiment.z = (experiment.z  - experiment.z.mean()) / experiment.z.std()
