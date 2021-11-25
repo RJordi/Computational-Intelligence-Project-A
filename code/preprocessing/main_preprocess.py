@@ -10,7 +10,7 @@ import extract_motion_sequence
 import normalize_and_standarize
 
 # Read csv data
-for subject_num in range(236, 237):
+for subject_num in range(170, 178):
 	for label in ['downstairs', 'normal', 'upstairs']:
 		for measurement in ['01', '02']:
 			try:
@@ -25,10 +25,10 @@ for subject_num in range(236, 237):
 				# and when entering the except case we create a boolean attribute called self.available with False value
 
 # Filter data
-			#filter_data.filter_data(Exp_data)
+			filter_data.filter_data(Exp_data)
 
 # Extract frequency
-			#extract_motion_sequence.extract_sequence(Exp_data)
+			extract_motion_sequence.extract_sequence(Exp_data)
 
 # Normalize and standarize data
 			normalize_and_standarize.standarize(Exp_data)
