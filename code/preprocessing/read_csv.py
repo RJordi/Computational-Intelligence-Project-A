@@ -19,6 +19,7 @@ class Data:
 	def extract_csv(self):
 		df = pd.read_csv(self.exp_path)
 		self.time = df[df.keys()[0]]
+		#print(self.time)
 		self.x = df[df.keys()[1]]
 		self.y = df[df.keys()[2]]
 		self.z = df[df.keys()[3]]

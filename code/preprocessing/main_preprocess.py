@@ -10,7 +10,7 @@ import extract_motion_sequence
 import normalize_and_standarize
 
 # Read csv data
-for subject_num in range(241, 242):
+for subject_num in range(236, 237):
 	for label in ['downstairs', 'normal', 'upstairs']:
 		for measurement in ['01', '02']:
 			try:
@@ -20,14 +20,15 @@ for subject_num in range(241, 242):
 				#print('Frequency for subject' + str(subject_num) + '_' + label + measurement + ' is: ' + str(Exp_data.frequency))
 			except:
 				print('Data for subject'+ str(subject_num) + '_' + label + measurement + ' is not available.')
+				continue
 				# another option would be to put the try except clauses in the class function extract_csv()
 				# and when entering the except case we create a boolean attribute called self.available with False value
 
 # Filter data
-			filter_data.filter_data(Exp_data)
+			#filter_data.filter_data(Exp_data)
 
 # Extract frequency
-			extract_motion_sequence.extract_sequence(Exp_data)
+			#extract_motion_sequence.extract_sequence(Exp_data)
 
 # Normalize and standarize data
 			#normalize_and_standarize.normalize(Exp_data)
