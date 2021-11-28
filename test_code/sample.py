@@ -1,5 +1,4 @@
 from read_csv import Data
-from plot_data import plot_data
 from extract_motion_sequence import extract_sequence
 import pandas as pd
 import numpy as np
@@ -16,17 +15,18 @@ class Sample:
         # i = experiment#, ie i=1 is normal 01
         # j = step#
         # k = x,y,z - 0 : x, 1 : y, 2 : z
+        flag = 0
         for i in range(len(experiment.experimentList)):
             peaks, _ = find_peaks(experiment.experimentList[i].x,height=1.5,distance = 150) #peaks is the index of the data
             sumPeaks = 0
             division = 1
             for j in range(len(peaks)-1):
-                if peaks[j+1]-peaks[j] > 4* (peaks[j]-peaks[j-1]):
+                if peaks[j+1]-peaks[j] > 3* (peaks[j]-peaks[j-1]):
                     if j == 2 or 1:
                         print("Outlier peak for i = "+str(i) + " Observe data")
                         division = division + 1
                         continue
-                    elif peaks[j+1]-peaks[j] > 4* (peaks[j-1]-peaks[j-2]):
+                    elif peaks[j+1]-peaks[j] > 3* (peaks[j-1]-peaks[j-2]):
                         print("Outlier peak for i = "+str(i) + " Observe data")
                         division = division + 1
                         continue
@@ -50,7 +50,8 @@ class Sample:
                         minP = peaks[j+1] - peaks[j] #minimum amount of data points found here, we resample everything to this value
             
             if len(index) == 0:
-                print("There are no peaks for i = " + str(i))
+                print("sample function: Fatal Error: \nThere are no peaks for i = " + str(i)+"\nExiting Program")
+                flag = 1
                 break
             
             for j in range(len(index)):
@@ -70,6 +71,12 @@ class Sample:
                 self.samples[i].append([]) #create new space for next sample   
             self.samples.append([[]]) # create new space for next experiment
             
+        if flag == 1:
+            plt.figure()
+            print("Plotting Problem Curve")
+            for j in range(len(peaks)-1):
+                plt.plot(experiment.experimentList[i].x[peaks[j]:peaks[j+1]])
+                
             #print("For i = "+ str(i))
             #print(index)
             #print("With an index length of = " + str(len(index)))

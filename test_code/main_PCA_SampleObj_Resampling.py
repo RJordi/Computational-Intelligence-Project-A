@@ -3,8 +3,9 @@
 
 print("Loading function files\n")
 from read_csv import Data
-from plot_data import plot_data
 from extract_motion_sequence import extract_sequence
+from filter_data import filter_data
+from normalize_and_standarize import standarize
 print("Function files complete\n")
 
 print("Loading Libraries\n")
@@ -60,13 +61,29 @@ class Sample:
         # i = experiment#, ie i=1 is normal 01
         # j = step#
         # k = x,y,z - 0 : x, 1 : y, 2 : z
-        for i in range(2):
+        flag = 0
+        for i in range(len(experiment.experimentList)):
             peaks, _ = find_peaks(experiment.experimentList[i].x,height=1.5,distance = 150) #peaks is the index of the data
             sumPeaks = 0
+            division = 1
             for j in range(len(peaks)-1):
-                sumPeaks = sumPeaks + peaks[j+1]-peaks[j]
+                if peaks[j+1]-peaks[j] > 3* (peaks[j]-peaks[j-1]):
+                    if j == 2 or 1:
+                        print("Outlier peak for i = "+str(i) + " Observe data")
+                        division = division + 1
+                        continue
+                    elif peaks[j+1]-peaks[j] > 3* (peaks[j-1]-peaks[j-2]):
+                        print("Outlier peak for i = "+str(i) + " Observe data")
+                        division = division + 1
+                        continue
+                    else:
+                        print("Outlier Ignored for i = "+str(i))
+                        continue
+                else:
+                    sumPeaks = sumPeaks + peaks[j+1]-peaks[j]
+                
             
-            average = sumPeaks/(len(peaks)-1)
+            average = sumPeaks/(len(peaks)-division)
             #Next we find the useable ranges and put them into a list... very convoluted but open for ideas xD
             index = []
             minP = 1000 #this will be used to find the minimum amount of data points
@@ -78,10 +95,14 @@ class Sample:
                     if (peaks[j+1] - peaks[j] < minP):
                         minP = peaks[j+1] - peaks[j] #minimum amount of data points found here, we resample everything to this value
             
+            if len(index) == 0:
+                print("sample function: Fatal Error: \nThere are no peaks for i = " + str(i)+"\nExiting Program")
+                flag = 1
+                break
+            
             for j in range(len(index)):
                 indexLower = index[j][0]
                 indexUpper = index[j][1]
-                print(indexUpper)
                 orDatax = experiment.experimentList[i].x[indexLower:indexUpper]
                 orDatay = experiment.experimentList[i].y[indexLower:indexUpper]
                 orDataz = experiment.experimentList[i].z[indexLower:indexUpper]
@@ -96,6 +117,12 @@ class Sample:
                 self.samples[i].append([]) #create new space for next sample   
             self.samples.append([[]]) # create new space for next experiment
             
+        if flag == 1:
+            plt.figure()
+            print("Plotting Problem Curve")
+            for j in range(len(peaks)-1):
+                plt.plot(experiment.experimentList[i].x[peaks[j]:peaks[j+1]])
+                
             #print("For i = "+ str(i))
             #print(index)
             #print("With an index length of = " + str(len(index)))
@@ -128,18 +155,20 @@ def PCA_Transform(experiment,components):
         experiment.experimentList[i].x = x_pca[:,0]
         experiment.experimentList[i].y = x_pca[:,1]
         experiment.experimentList[i].z = x_pca[:,2]
-        experiment.experimentList[i].time = experiment.experimentList[i].time.dropna().to_numpy() #turned into numpy
+        #experiment.experimentList[i].time = experiment.experimentList[i].time.dropna().to_numpy() #turned into numpy
         experiment.experimentList[i].sampleNo = np.linspace(0,len(experiment.experimentList[i].x-1),len(experiment.experimentList[i].x))
 
 
-subject = 238
+subject = 236
 experiment1 = experiment(subject)
 #Extract motion sequence from all experiments and walking positions
 #plt.plot(experiment1.normal(2).sampleNo,experiment1.normal(2).x)
-for i in range(8):
+for i in range(6):
+    filter_data(experiment1.experimentList[i])
     extract_sequence(experiment1.experimentList[i]) #please include sample# in the extract_csv function
+    standarize(experiment1.experimentList[i])
 
-for i in range(8):
+for i in range(6):
     experiment1.experimentList[i].sampleNo = np.linspace(0,len(experiment1.experimentList[i].x)-1,len(experiment1.experimentList[i].x))
     
 
@@ -158,6 +187,7 @@ sumPeaks = 0
 fig1 = plt.figure()
 for i in range(len(peaks)-2):
     plt.plot(experiment1.experimentList[1].x[peaks[i]:peaks[i+1]])
+    #plt.show()
 for i in range(len(peaks)-1):
     sumPeaks = sumPeaks + peaks[i+1]-peaks[i]
 
@@ -171,9 +201,12 @@ for i in range(len(peaks)-1):
     else:
         plt.plot(experiment1.experimentList[1].x[peaks[i]:peaks[i+1]])
         count = count + 1
+
 #post resampling
 sample1 = Sample(experiment1)
 fig4 = plt.figure()
 for i in range(len(sample1.samples[0])-1):
-    print(i)
+    #print(i)
     plt.plot(sample1.samples[1][i][0])
+
+plt.show()
