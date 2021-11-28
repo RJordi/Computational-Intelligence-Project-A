@@ -19,8 +19,8 @@ def arrange_data (resampled_list):
 		labels_array += [sample.label]*sample.number_of_steps
 	
 	samples_tensor = np.vstack(samples_tensor)
-	print('Shape of samples tensor:', np.shape(samples_tensor))
-	print('Shape of labels array:', np.shape(labels_array))
+	#print('Shape of samples tensor:', np.shape(samples_tensor))
+	#print('Shape of labels array:', np.shape(labels_array))
 	#print(labels_array)
 
 	return samples_tensor, labels_array
