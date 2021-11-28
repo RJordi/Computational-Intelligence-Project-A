@@ -4,6 +4,7 @@ from sample import Sample
 from subjectResample import subjectResample
 import matplotlib.pyplot as plt
 import normalize_and_standarize
+import filter_data
 
 subject = 235
 
