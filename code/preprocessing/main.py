@@ -3,6 +3,7 @@ from PCA_Transform import PCA_Transform
 from sample import Sample
 from subjectResample import subjectResample
 import matplotlib.pyplot as plt
+import normalize_and_standarize
 
 subject = 235
 
