@@ -1,16 +1,9 @@
 # Project A
-Gait Project
 
-**Progress:**
-1. Data Collection Complete
+Folder "code" contains all the code that creates numpy arrays of data and labels to feed to the ANN.
 
-**Todo:**
+To run the code:
+- Specify subjects in "main_preprocess.py" -> line 22
+- Run "main.py"
 
-In General:
-- Finish data processing. ie. cutting out the noise of the data and upload to sciebo.
-
-Chris:
-- begin report
-
-Viktor:
-- stop being so **ugly**
+NOTE: To modify parameters of the ANN, see "run_ann.py"
