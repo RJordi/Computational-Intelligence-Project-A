@@ -3,8 +3,13 @@ from sklearn.model_selection import StratifiedKFold
 #from sklearn.model_selection import KFold
 from sklearn import metrics
 import tensorflow as tf
+#import matplotlib.pyplot as plt
 
 def run_ann(samples_tensor, labels_array, subjects_array):
+
+	#loss_list = []
+	#accuracy_list = []
+	#fold_list = []
 	
 	# Encode labels into numbers (needed for model.fit function)
 	for i in range(len(labels_array)):
@@ -35,8 +40,8 @@ def run_ann(samples_tensor, labels_array, subjects_array):
 		print('Number of upstairs: ', np.count_nonzero(y_train == 2))
 		x_test = samples_tensor[test]
 		y_test = labels_array[test]
-		print(np.shape(x_train))
-		print(np.shape(x_test))
+		print('Shape of training data: ', np.shape(x_train))
+		print('Shape of test data: ', np.shape(x_test))
 
 		i_shape = np.shape(x_train)[-2:]
 
@@ -48,9 +53,13 @@ def run_ann(samples_tensor, labels_array, subjects_array):
 
 		model.compile(optimizer = 'adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
-		model.fit(x_train, y_train, validation_data=(x_test,y_test), epochs = 10, batch_size = 30)
+		model.fit(x_train, y_train, epochs = 10, batch_size = 30)
 
 		loss, accuracy = model.evaluate(x_test, y_test, verbose=0)
+
+		#loss_list.append(loss)
+		#accuracy_list.append(accuracy)
+		#fold_list.append(fold)
 
 		print('Loss=', loss)
 		print('Accuracy=', accuracy)
@@ -73,6 +82,7 @@ def run_ann(samples_tensor, labels_array, subjects_array):
 		# Measure this fold's accuracy
 		score = metrics.accuracy_score(y_test, pred)
 		print(f"Fold score (accuracy): {score}")
+		print('\n')
 
 	# Build the oos prediction list and calculate the error.
 	oos_y = np.concatenate(oos_y)
@@ -81,5 +91,12 @@ def run_ann(samples_tensor, labels_array, subjects_array):
 	score = metrics.accuracy_score(oos_y, oos_pred)
 	print(f"Final score (accuracy): {score}")
 
-
-
+'''
+	plt.plot(fold_list, loss_list, marker='.')
+	plt.plot(fold_list, accuracy_list, marker='x')
+	plt.xlabel('Fold number')
+	#plt.ylabel('Precentage')
+	plt.title('Evolution of accuracy and loss for 10 folds.')
+	plt.legend(['Loss', 'Accuracy'], loc='best')
+	plt.show()
+'''
