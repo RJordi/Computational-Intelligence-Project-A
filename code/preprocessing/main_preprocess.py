@@ -21,7 +21,7 @@ def main_preprocess():
 	minP = 10000
 
 	# Read csv data
-	for subject_num in range(150, 275):
+	for subject_num in range(150, 170):
 		for label in ['downstairs', 'normal', 'upstairs']:
 			for measurement in ['01', '02']:
 				try:
