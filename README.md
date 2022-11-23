@@ -26,7 +26,7 @@ The project is structured as follows:
 		- `resample_all_data.py`: Resample all data points to the lowest frame number.
 		- `arrange_data_for_ann.py`: Arrange data into a single multidimensional numpy array.
 		- `plot_data.py`: Plotting functions.
-	- `ann/`: .
-		-`main_ann.py`: Main function to run the neural network.
-		-`run_ann.py`: Create feedforward neural network and run it using 10-fold cross-validation.
+	- `ann/`: Artificial neural network functions.
+		- `main_ann.py`: Main function to run the neural network.
+		- `run_ann.py`: Create feedforward neural network and run it using 10-fold cross-validation.
 	- `main.py`: Main function to run the code.
