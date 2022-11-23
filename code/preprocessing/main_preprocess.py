@@ -9,7 +9,7 @@ from read_csv import Data
 import filter_data
 import plot_data
 import extract_motion_sequence
-import normalize_and_standarize
+import normalize_and_standardize
 import PCA_Transform
 from segment_into_samples import Sample
 import resample_all_data
@@ -32,21 +32,19 @@ def main_preprocess():
 				except:
 					#print('Data for subject' + str(subject_num) + '_' + label + measurement + ' is not available.')
 					continue
-					# another option would be to put the try except clauses in the class function extract_csv()
-					# and when entering the except case we create a boolean attribute called self.available with False value
 
 				try:
 
 		# Filter data
 					filter_data.filter_data(Exp_data)
 
-		# Extract frequency
+		# Extract motion sequence
 					if not extract_motion_sequence.extract_sequence(Exp_data):
 						#print('Motion sequence not extracted correctly for subject' + str(subject_num) + '_' + label + measurement)
-						continue # skip data if not succesfully extracted
+						continue # skip data if not successfully extracted
 
-		# Normalize and standarize data
-					normalize_and_standarize.standarize(Exp_data)
+		# Normalize and standardize data
+					normalize_and_standardize.standardize(Exp_data)
 
 		# Rotate data (apply PCA transformation)
 					PCA_Transform.PCA_Transform(Exp_data, 3)
@@ -74,7 +72,7 @@ def main_preprocess():
 	# Plot resmapled data
 	#plot_data.plot_resampled_data(resampled_list)
 
-	# Arrange data in single multidimensional numpy array to feed ANN and create corresponding array with labels.
-	# The two arrays returned can be feeded to the ANN.
+	# Arrange data into a single multidimensional numpy array to feed ANN and create corresponding array with labels.
+	# The two arrays returned can be fed to the ANN.
 	return arrange_data_for_ann.arrange_data(resampled_list)
 

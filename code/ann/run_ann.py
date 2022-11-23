@@ -41,7 +41,7 @@ def run_ann(samples_tensor, labels_array, subjects_array):
 		i_shape = np.shape(x_train)[-2:]
 
 		model = tf.keras.models.Sequential([
-		tf.keras.layers.Flatten(input_shape = i_shape), #Flatten layer allows us to get correct input format
+		tf.keras.layers.Flatten(input_shape = i_shape), # Flatten layer allows us to get correct input format
 		tf.keras.layers.Dense(50, activation = 'relu'),
 		tf.keras.layers.Dense(3, activation = 'softmax')
 		])

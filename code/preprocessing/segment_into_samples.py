@@ -32,7 +32,7 @@ class Sample:
                 sumPeaks = sumPeaks + peaks[j+1]-peaks[j]
         average = sumPeaks/(len(peaks)-division)
 
-        #Next we find the useable ranges and put them into a list... very convoluted but open for ideas xD
+        #Next we find the useable ranges and put them into a list
         index = []
         minP = 1000 #this will be used to find the minimum amount of data points
         for j in range(len(peaks)-1):
