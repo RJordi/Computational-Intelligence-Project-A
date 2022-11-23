@@ -9,7 +9,7 @@ The data was obtained from experiments performed by the students participating i
 For this neural network, only the accelerometer data is used. The accelerometer data is given at a certain frequency for each space coordinate (x,y,z). 
 
 The data processing steps are summarized in the figure below:
-![Data Processing Diagram](https://github.com/RJordi/walking-path-detection/blob/master/data_processing_diagram)
+![Data Processing Diagram](https://github.com/RJordi/walking-path-detection/blob/master/data_processing_diagram.png)
 
 
 Code structure
