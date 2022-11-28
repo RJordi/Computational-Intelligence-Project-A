@@ -13,6 +13,11 @@ The data processing steps are summarized in the figure below:
 ![Data Processing Diagram](https://github.com/RJordi/walking-path-detection/blob/main/data_processing_diagram.png)
 
 
+Requirements and installation
+-------
+The code is developed with **Python 3.8.12**. All the required Python packages can be installed in a new conda environment called *wpd_env* using `conda env create -f environment.yml`.
+
+
 Code structure
 -------
 The project is structured as follows:
